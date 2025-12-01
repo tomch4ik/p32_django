@@ -7,6 +7,12 @@
 <body>
     <h1>Блог</h1>
 
+    <form method="post">
+    {% csrf_token %}
+        {{ form.as_p }}
+    <button type="submit">Save</button>
+    </form>
+
     {% if posts %}
         <ul>
             {% for post in posts %}
@@ -14,9 +20,10 @@
                     <h2>
                         <a href="{% url 'blog:post_detail' post.pk %}">
                             {{ post.title }}
+                            {{ post }}
                         </a>
                     </h2>
-                    <p><small>Створено: {{ post.created_at }}</small></p>
+                    <p><small>Створено: {{ post.create_at }}</small></p>
                     <p>
                         {{ post.content|truncatechars:150 }}
                     </p>
